@@ -5,3 +5,6 @@
 *.css text
 *.js text
 *.scss text
+*.pb filter=lfs diff=lfs merge=lfs -text
+*.tgz filter=lfs diff=lfs merge=lfs -text
+*.tfevents* filter=lfs diff=lfs merge=lfs -text
