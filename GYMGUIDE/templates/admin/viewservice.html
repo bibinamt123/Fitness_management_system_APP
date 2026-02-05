@@ -1,0 +1,177 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "admin/homeindex.html" %}#}
+{##}
+{#{% block body %}#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/myapp/admin_viewserviceplanpost/#id">#}
+{#{% csrf_token %}#}
+{#  <table class="pull-left">#}
+{#    <tr>#}
+{#      <td>#}
+{#      <input type="text" name="search" id="textfield" class="form-control" placeholder="Service Name..."/></td>#}
+{#      <td><input type="submit" name="button" id="button" value="SEARCH" class="btn btn-success" /></td>#}
+{#    </tr>#}
+{#    #}
+{#  </table>#}
+{#<br>#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Sl no</th>#}
+{#      <th>Plan</th>#}
+{#      <th>Amount</th>#}
+{#      <th>Duration(M)</th>#}
+{#      <th></th>#}
+{#      <th></th>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ forloop.counter }}</td>#}
+{#      <td>{{ i.Splan }}</td>#}
+{#      <td>{{ i.amount }}</td>#}
+{#      <td>{{ i.duration }}</td>#}
+{#      <td><a href="/myapp/admin_editservice/{{ i.id }}#id" class="btn btn-success">edit</a></td>#}
+{#      <td><a href="/myapp/delete_serviceplan/{{ i.id }}" onclick="return confirm('Are You Sure?')" class="btn btn-danger">delete</a></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#  </table>#}
+{##}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>View Service Plans</title>
+<style>
+    .feature-icon {
+        color: green;
+        font-size: 18px;
+    }
+    .no-feature {
+        color: red;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+{% extends "admin/homeindex.html" %}
+
+{% block body %}
+<body>
+    <h3>View Service Plan</h3>
+
+    <form id="form1" name="form1" method="post" action="/myapp/admin_viewserviceplanpost/#id">
+        {% csrf_token %}
+{#        <table class="pull-left">#}
+{#            <tr>#}
+{#                <td>#}
+{#                    <input type="text" name="search" id="textfield" class="form-control" placeholder="Search Service Name..."/>#}
+{#                </td>#}
+{#                <td>#}
+{#                    <input type="submit" name="button" id="button" value="SEARCH" class="btn btn-success" />#}
+{#                </td>#}
+{#            </tr>#}
+{#        </table>#}
+
+        <br><br>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Sl No</th>
+                <th>Plan</th>
+                <th>Amount ($)</th>
+                <th>Duration (Months)</th>
+{#                <th>Free Riding</th>#}
+                <th>Unlimited Equipment</th>
+                <th>Personal Trainer</th>
+                <th>Weight Loss Classes</th>
+                <th>Group Classes</th>
+{#                <th>Swimming Pool</th>#}
+{#                <th>Sauna Access</th>#}
+                <th>Nutrition Plan</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.Splan }}</td>
+                <td>${{ i.amount }}</td>
+                <td>{{ i.duration }}</td>
+{#                <td>#}
+{#                    {% if i.free_riding %}#}
+{#                        <span class="feature-icon">&#10004;</span>#}
+{#                    {% else %}#}
+{#                        <span class="no-feature">&#10006;</span>#}
+{#                    {% endif %}#}
+{#                </td>#}
+                <td>
+                    {% if i.unlimited_equipment %}
+                        <span class="feature-icon">&#10004;</span>
+                    {% else %}
+                        <span class="no-feature">&#10006;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if i.personal_trainer %}
+                        <span class="feature-icon">&#10004;</span>
+                    {% else %}
+                        <span class="no-feature">&#10006;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if i.weight_loss_classes %}
+                        <span class="feature-icon">&#10004;</span>
+                    {% else %}
+                        <span class="no-feature">&#10006;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if i.group_classes %}
+                        <span class="feature-icon">&#10004;</span>
+                    {% else %}
+                        <span class="no-feature">&#10006;</span>
+                    {% endif %}
+                </td>
+{#                <td>#}
+{#                    {% if i.swimming_pool_access %}#}
+{#                        <span class="feature-icon">&#10004;</span>#}
+{#                    {% else %}#}
+{#                        <span class="no-feature">&#10006;</span>#}
+{#                    {% endif %}#}
+{#                </td>#}
+{#                <td>#}
+{#                    {% if i.sauna_access %}#}
+{#                        <span class="feature-icon">&#10004;</span>#}
+{#                    {% else %}#}
+{#                        <span class="no-feature">&#10006;</span>#}
+{#                    {% endif %}#}
+{#                </td>#}
+                <td>
+                    {% if i.nutrition_plan %}
+                        <span class="feature-icon">&#10004;</span>
+                    {% else %}
+                        <span class="no-feature">&#10006;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/myapp/admin_editservice/{{ i.id }}" class="btn btn-success">Edit</a>
+                </td>
+                <td>
+                    <a href="/myapp/delete_serviceplan/{{ i.id }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+{% endblock %}
+</html>

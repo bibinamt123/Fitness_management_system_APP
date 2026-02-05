@@ -1,0 +1,170 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "trainer/homeindex.html" %}#}
+{#{% block body %}#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/myapp/add_schedule_post/">#}
+{#    {% csrf_token %}#}
+{#          <input type="hidden" name="pid" id="textfield"  class="form-control" required value="{{ id }}" /></td>#}
+{##}
+{#  <table class="table table-bordered">#}
+{##}
+{#    <tr>#}
+{#      <th>Date</th>#}
+{#      <td>#}
+{#      <input type="date" name="textfield" id="textfield"  class="form-control" required /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Fromtime</th>#}
+{#      <td>#}
+{#      <input type="time" name="textfield2" id="textfield2"  class="form-control" required /></th>#}
+{#    </tr>#}
+{#      <tr>#}
+{#      <th>Totime</th>#}
+{#      <td>#}
+{#      <input type="time" name="textfield3" id="textfield2"  class="form-control" required /></th>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th height="26">&nbsp;</th>#}
+{#      <td><input type="submit" name="button" id="button" class="btn btn-info" value="Submit" /></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#<script>#}
+{#    window.onload = function() {#}
+{#        // Set minimum date for the Date input field to today#}
+{#        var today = new Date().toISOString().split('T')[0];#}
+{#        document.getElementById("dateField").setAttribute("min", today);#}
+{##}
+{#        // Set minimum time for the Fromtime input field to current time#}
+{#        var now = new Date();#}
+{#        var hours = now.getHours().toString().padStart(2, '0');#}
+{#        var minutes = now.getMinutes().toString().padStart(2, '0');#}
+{#        var currentTime = hours + ":" + minutes;#}
+{#        document.getElementById("fromTimeField").setAttribute("min", currentTime);#}
+{#    };#}
+{#</script>#}
+{#</head>#}
+{#{% extends "trainer/homeindex.html" %}#}
+{#{% block body %}#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/myapp/add_schedule_post/">#}
+{#    {% csrf_token %}#}
+{#    <input type="hidden" name="pid" id="textfield" class="form-control" required value="{{ id }}" />#}
+{##}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Date</th>#}
+{#      <td>#}
+{#        <input type="date" name="textfield" id="dateField" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Fromtime</th>#}
+{#      <td>#}
+{#        <input type="time" name="textfield2" id="fromTimeField" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Totime</th>#}
+{#      <td>#}
+{#        <input type="time" name="textfield3" id="textfield2" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th height="26">&nbsp;</th>#}
+{#      <td><input type="submit" name="button" id="button" class="btn btn-info" value="Submit" /></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Form</title>
+    <script>
+        function updateTimeValidation() {
+            var dateField = document.getElementById("dateField");
+            var fromTimeField = document.getElementById("fromTimeField");
+            var toTimeField = document.getElementById("toTimeField");
+
+            var today = new Date().toISOString().split('T')[0];
+            var selectedDate = dateField.value;
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var currentTime = hours + ":" + minutes;
+
+            // If today is selected, restrict From Time to current time
+            if (selectedDate === today) {
+                fromTimeField.setAttribute("min", currentTime);
+            } else {
+                fromTimeField.removeAttribute("min");
+            }
+
+            // Ensure To Time is always after From Time
+            fromTimeField.addEventListener("change", function() {
+                toTimeField.setAttribute("min", fromTimeField.value);
+            });
+        }
+
+        window.onload = function() {
+            document.getElementById("dateField").setAttribute("min", new Date().toISOString().split('T')[0]);
+            updateTimeValidation();
+        };
+    </script>
+</head>
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body>
+<h2 class="text-center">Add Time Schedule</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/add_schedule_post/">
+    {% csrf_token %}
+    <input type="hidden" name="pid" id="textfield" class="form-control" required value="{{ id }}" />
+
+  <table class="table table-bordered">
+
+    <tr>
+      <th>Date</th>
+      <td>
+        <input type="date" name="textfield" id="dateField" class="form-control" required onchange="updateTimeValidation()" />
+      </td>
+    </tr>
+    <tr>
+      <th>From Time</th>
+      <td>
+        <input type="time" name="textfield2" id="fromTimeField" class="form-control" required />
+      </td>
+    </tr>
+    <tr>
+      <th>To Time</th>
+      <td>
+        <input type="time" name="textfield3" id="toTimeField" class="form-control" required />
+      </td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <td><input type="submit" name="button" id="button" class="btn btn-info" value="Submit" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}
+</html>

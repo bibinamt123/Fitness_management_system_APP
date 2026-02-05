@@ -1,0 +1,135 @@
+{#{% extends 'trainer/homeindex.html' %}#}
+{#{% block body %}#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/myapp/View_diet_chart_post/#id">#}
+{#{% csrf_token %}#}
+{#<table class="pull-left">#}
+{#  <tr>#}
+{#    <td width="144">#}
+{#      <input type="text" name="textfield" id="textfield" class="form-control"/></td>#}
+{#    <td width="52"><input type="submit" name="button3" id="button3" value="Search" class="btn btn-outline-success" /></td>#}
+{#  </tr>#}
+{#</table>#}
+{#<br />#}
+{#<br />#}
+{#<br>#}
+{#<br>#}
+{##}
+{#<table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Sino</th>#}
+{#      <th>Name</th>#}
+{#      <th>Date</th>#}
+{#      <th>Diet_chart</th>#}
+{#        <th>BMI</th>#}
+{#      <th>Alcoholabuse</th>#}
+{#      <th>Allergies</th>#}
+{#      <th>Arthritis</th>#}
+{#      <th>Asthma</th>#}
+{#      <th>Bloodpressure</th>#}
+{#      <th>Cancer</th>#}
+{#      <th>Cholestrol</th>#}
+{#      <th>Depression</th>#}
+{#      <th>Diabetes</th>#}
+{#      <th>Druguse</th>#}
+{#      <th>Gender</th>#}
+{#      <th>Headaches</th>#}
+{#      <th>HeartProblem</th>#}
+{#      <th>Kidney</th>#}
+{#      <th>Liver</th>#}
+{#      <th>Obicity</th>#}
+{#      <th>Pregnancy</th>#}
+{#      <th>Smoking</th>#}
+{#      <th>Stroke</th>#}
+{##}
+{#      <td></td>#}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#      <td>{{ forloop.counter }}</td>#}
+{#      <td>{{ i.Name }}</td>#}
+{#      <td>{{ i.Date }}</td>#}
+{#      <td><img src="{{ i.Dietplan }}" height="100px" width="100px" ></td>#}
+{#        <td>{{ i.bmi }}</td>#}
+{#        <td>{{ i.Alcoholabuse }}</td>#}
+{#        <td>{{ i.Allergies }}</td>#}
+{#        <td>{{ i.Arthritis }}</td>#}
+{#        <td>{{ i.Asthma }}</td>#}
+{#        <td>{{ i.Bloodpressure }}</td>#}
+{#        <td>{{ i.Cancer }}</td>#}
+{#        <td>{{ i.Cholestrol }}</td>#}
+{#        <td>{{ i.Depression }}</td>#}
+{#        <td>{{ i.Diabetes }}</td>#}
+{#        <td>{{ i.Druguse }}</td>#}
+{#        <td>{{ i.Gender }}</td>#}
+{#        <td>{{ i.Headaches }}</td>#}
+{#        <td>{{ i.Heartproblem }}</td>#}
+{#        <td>{{ i.Kidney }}</td>#}
+{#        <td>{{ i.Liver }}</td>#}
+{#        <td>{{ i.Obicity }}</td>#}
+{#        <td>{{ i.Pregnancy }}</td>#}
+{#        <td>{{ i.Smoking }}</td>#}
+{#        <td>{{ i.Stroke }}</td>#}
+{#      <td><a href="/myapp/Edit_diet_chart/{{ i.id }}" class="btn btn-success">Edit</a></td>#}
+{#        <td><a href="/myapp/delete_diet_chart/{{ i.id }}" class="btn btn-danger">Delete</a></td>#}
+{#      </td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{% extends 'trainer/homeindex.html' %}
+{% block body %}
+
+<body>
+<form id="form1" name="form1" method="post" action="/myapp/View_diet_chart_post/#id">
+{% csrf_token %}
+<table class="pull-left">
+  <tr>
+    <td width="144">
+      <input type="text" name="textfield" id="textfield" class="form-control"/></td>
+    <td width="52"><input type="submit" name="button3" id="button3" value="Search" class="btn btn-outline-success" /></td>
+  </tr>
+</table>
+<br />
+<br />
+<br>
+<br>
+
+{% for i in data %}
+<div class="card mb-3">
+  <div class="card-header">Diet Chart {{ forloop.counter }}</div>
+  <div class="card-body">
+    <p><strong>Name:</strong> {{ i.Name }}</p>
+    <p><strong>Date:</strong> {{ i.Date }}</p>
+    <p><strong>Diet Chart:</strong> <br><img src="{{ i.Dietplan }}" height="100px" width="100px" ></p>
+    <p><strong>BMI:</strong> {{ i.bmi }}</p>
+    <p><strong>Alcohol Abuse:</strong> {{ i.Alcoholabuse }}</p>
+    <p><strong>Allergies:</strong> {{ i.Allergies }}</p>
+    <p><strong>Arthritis:</strong> {{ i.Arthritis }}</p>
+    <p><strong>Asthma:</strong> {{ i.Asthma }}</p>
+    <p><strong>Blood Pressure:</strong> {{ i.Bloodpressure }}</p>
+    <p><strong>Cancer:</strong> {{ i.Cancer }}</p>
+    <p><strong>Cholesterol:</strong> {{ i.Cholestrol }}</p>
+    <p><strong>Depression:</strong> {{ i.Depression }}</p>
+    <p><strong>Diabetes:</strong> {{ i.Diabetes }}</p>
+    <p><strong>Drug Use:</strong> {{ i.Druguse }}</p>
+    <p><strong>Gender:</strong> {{ i.Gender }}</p>
+    <p><strong>Headaches:</strong> {{ i.Headaches }}</p>
+    <p><strong>Heart Problem:</strong> {{ i.Heartproblem }}</p>
+    <p><strong>Kidney Issues:</strong> {{ i.Kidney }}</p>
+    <p><strong>Liver Issues:</strong> {{ i.Liver }}</p>
+    <p><strong>Obesity:</strong> {{ i.Obicity }}</p>
+    <p><strong>Pregnancy:</strong> {{ i.Pregnancy }}</p>
+    <p><strong>Smoking:</strong> {{ i.Smoking }}</p>
+    <p><strong>Stroke:</strong> {{ i.Stroke }}</p>
+    <a href="/myapp/Edit_diet_chart/{{ i.id }}" class="btn btn-success">Edit</a>
+    <a href="/myapp/delete_diet_chart/{{ i.id }}" class="btn btn-danger">Delete</a>
+  </div>
+</div>
+{% endfor %}
+</form>
+</body>
+{% endblock %}

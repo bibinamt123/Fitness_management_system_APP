@@ -1,0 +1,122 @@
+{# <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>#}
+{#    <title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "admin/homeindex.html" %}#}
+{##}
+{#{% block body %}#}
+{#    <body>#}
+{#    <form id="form1" name="form1" method="post" action="/myapp/admin_editservicepost/">#}
+{#        {% csrf_token %}#}
+{#        <table class="table table-bordered">#}
+{#            <input type="hidden" name="sid" value="{{ data.id }}">#}
+{#            <tr>#}
+{#                <th>Plan</th>#}
+{#                <td>#}
+{#                    <select name="select" id="select" class="form-control">#}
+{#                        <option value="cardio" {% if data.Splan == "cardio" %} selected {% endif %}>cardio</option>#}
+{#                        <option value="weightloss"{% if data.Splan == "weightloss" %} selected {% endif %} >weightloss#}
+{#                        </option>#}
+{#                        <option value="muscle building" {% if data.Splan == "muscle building" %} selected {% endif %}>#}
+{#                            muscle building#}
+{#                        </option>#}
+{#                        <option value="strength training" {% if data.Splan == "strength training" %}#}
+{#                                selected {% endif %}>strength training#}
+{#                        </option>#}
+{##}
+{#                    </select></td>#}
+{#            </tr>#}
+{##}
+{#            <tr>#}
+{#                <th>Amount</th>#}
+{#                <td><input type="number" name="nbr" class="form-control" required pattern="[0-9]" value="{{ data.amount }}"></td>#}
+{#            </tr>#}
+{##}
+{#            <tr>#}
+{#                <th>Duration (M)</th>#}
+{#                <td><input type="number" name="dur" class="form-control" required pattern="[0-9]{2}" value="{{ data.duration }}"></td>#}
+{#            </tr>#}
+{##}
+{##}
+{#            <tr>#}
+{#                <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Submit" class="btn btn-info" /></td>#}
+{#            </tr>#}
+{#        </table>#}
+{#    </form>#}
+{#    </body>#}
+{#{% endblock %}#}
+{#</html>#}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Edit Service Plan</title>
+</head>
+
+{% extends "admin/homeindex.html" %}
+
+{% block body %}
+<body>
+    <form id="form1" name="form1" method="post" action="/myapp/admin_editservicepost/">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <input type="hidden" name="sid" value="{{ data.id }}">
+
+            <tr>
+                <th><label for="select">Plan</label></th>
+                <td>
+                    <select name="select" id="select" class="form-control" required>
+                        <option value="cardio" {% if data.Splan == "cardio" %} selected {% endif %}>Cardio</option>
+                        <option value="weightloss" {% if data.Splan == "weightloss" %} selected {% endif %}>Weightloss</option>
+                        <option value="muscle building" {% if data.Splan == "muscle building" %} selected {% endif %}>Muscle Building</option>
+                        <option value="strength training" {% if data.Splan == "strength training" %} selected {% endif %}>Strength Training</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for="nbr">Amount ($)</label></th>
+                <td><input type="number" name="nbr" id="nbr" class="form-control" required pattern="\d+" value="{{ data.amount }}" /></td>
+            </tr>
+
+            <tr>
+                <th><label for="dur">Duration (Months)</label></th>
+                <td><input type="number" name="dur" id="dur" class="form-control" required pattern="\d+" value="{{ data.duration }}" /></td>
+            </tr>
+
+            <tr>
+                <th><label for="desc">Description</label></th>
+                <td><textarea name="desc" id="desc" class="form-control" rows="3">{{ data.description }}</textarea></td>
+            </tr>
+
+            <tr>
+                <th><label for="discount">Discount (%)</label></th>
+                <td><input type="number" name="discount" id="discount" class="form-control" min="0" max="100" value="{{ data.discount }}" /></td>
+            </tr>
+
+            <tr>
+                <th><label for="features">Additional Features</label></th>
+                <td>
+                    <label><input type="checkbox" name="free_riding" {% if data.free_riding %} checked {% endif %}> Free Riding</label><br>
+                    <label><input type="checkbox" name="unlimited_equipment" {% if data.unlimited_equipment %} checked {% endif %}> Unlimited Equipment</label><br>
+                    <label><input type="checkbox" name="personal_trainer" {% if data.personal_trainer %} checked {% endif %}> Personal Trainer</label><br>
+                    <label><input type="checkbox" name="weight_loss_classes" {% if data.weight_loss_classes %} checked {% endif %}> Weight Loss Classes</label><br>
+                    <label><input type="checkbox" name="group_classes" {% if data.group_classes %} checked {% endif %}> Group Classes</label><br>
+                    <label><input type="checkbox" name="swimming_pool_access" {% if data.swimming_pool_access %} checked {% endif %}> Swimming Pool</label><br>
+                    <label><input type="checkbox" name="sauna_access" {% if data.sauna_access %} checked {% endif %}> Sauna Access</label><br>
+                    <label><input type="checkbox" name="nutrition_plan" {% if data.nutrition_plan %} checked {% endif %}> Nutrition Plan</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="button" id="button" value="Submit" class="btn btn-info" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+{% endblock %}
+</html>

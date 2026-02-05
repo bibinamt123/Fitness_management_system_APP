@@ -1,0 +1,125 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "trainer/homeindex.html" %}#}
+{#{% block body %}#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{##}
+{#<table class="pull-left">#}
+{#    <tr>#}
+{#        <td><input type="text" name="search" class="form-control" placeholder="Tip Name..."/></td>#}
+{#        <td><input type="submit" class="btn btn-success" value="search"/></td>#}
+{#    </tr>#}
+{#</table>#}
+{#<br>#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <td>Sl no</td>#}
+{#      <td>Date</td>#}
+{#      <td>Weight</td>#}
+{#      <td>Calories burned</td>#}
+{#      <td>&nbsp;Progressnote</td>#}
+{#      <td>&nbsp;Workoutname</td>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ forloop.counter  }}</td>#}
+{#      <td>{{ i.date }}&nbsp;</td>#}
+{#      <td>{{ i.weight }}&nbsp;</td>#}
+{#      <td>{{ i.caloriesburned }}&nbsp;</td>#}
+{#      <td>{{ i.progressnotes }}&nbsp;</td>#}
+{#      <td>{{ i.WORKOUTPLAN.workoutname }}&nbsp;</td>#}
+{#    </tr>#}
+{#        {% endfor %}#}
+{#  </table>#}
+{##}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Progress Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body><h2 class="text-center">View Progress</h2>
+
+    <form id="form1" name="form1" method="post" action="">
+        {% csrf_token %}
+
+        <table class="table table-bordered">
+            <tr>
+                <td>Sl no</td>
+                <td>Date</td>
+                <td>Weight</td>
+                <td>Calories Burned</td>
+                <td>Progress Note</td>
+                <td>Workout Name</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.weight }}</td>
+                <td>{{ i.caloriesburned }}</td>
+                <td>{{ i.progressnotes }}</td>
+                <td>{{ i.WORKOUTPLAN.workoutname }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Canvas for Chart -->
+        <canvas id="progressChart" width="400" height="200"></canvas>
+
+        <script>
+            // Extract data from Django template
+            var labels = [{% for i in data %} "{{ i.date }}", {% endfor %}];
+            var weightData = [{% for i in data %} {{ i.weight }}, {% endfor %}];
+            var caloriesData = [{% for i in data %} {{ i.caloriesburned }}, {% endfor %}];
+
+            // Create Chart
+            var ctx = document.getElementById('progressChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Weight (kg)',
+                            data: weightData,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Calories Burned',
+                            data: caloriesData,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: false }
+                    }
+                }
+            });
+        </script>
+
+    </form>
+</body>
+{% endblock %}
+</html>

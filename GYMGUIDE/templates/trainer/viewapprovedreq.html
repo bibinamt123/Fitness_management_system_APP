@@ -1,0 +1,81 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body>
+<h2 class="text-center">Approved Request</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/trainer_viewapprovedrequest_post/">
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td>From</td>
+      <td>
+      <input type="date" name="textfield" id="textfield"  class="form-control"  /></td>
+      <td>to</td>
+      <td>
+      <input type="date" name="textfield2" id="textfield2"  class="form-control" /></td>
+      <td><input type="submit" name="button" id="button" class="btn btn-info" value="Search" /></td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <table class="table table-bordered">
+
+    <tr>
+      <td>Sl no</td>
+      <td>Date</td>
+      <td>Name</td>
+      <td>Contact</td>
+      <td>phone no</td>
+      <td>Address</td>
+      <td>photo</td>
+      <td>gender</td>
+        <th>Health Condition</th>
+<th>Chat</th>
+        <th>Payment</th>
+        <th>Workoutplan</th>
+        <th>Tips</th>
+        <th>Class Plan</th>
+
+    </tr>
+ {% for i in data %}
+    <tr>
+      <td>{{forloop.counter }}&nbsp;</td>
+      <td>{{ i.date }}</td>
+      <td class="text-nowrap">{{ i.USER.name }}</td>
+      <td>{{ i.USER.email }}&nbsp;</td>
+      <td>{{ i.USER.phoneno}}&nbsp;</td>
+      <td>{{i.USER.place }}&nbsp;<br>{{i.USER.post  }}<br>{{ i.USER.pin }}<br>{{ i.USER.district }}</td>
+      <td>&nbsp;<img src="{{ i.USER.photo }}"height="100" width="100"> </td>
+      <td>&nbsp;{{ i.USER.gender }}</td>
+        <td>Height:{{ i.USER.height }}<br>Weight:{{ i.USER.weight }}<br>{{ i.weightmedicaldetails }}</td>
+    <td><a href="/myapp/chat/{{ i.USER.LOGIN.id }}" class="btn btn-outline-success">Chat</a> </td>
+
+    <td><a href="/myapp/view_user_payment/{{ i.USER.id }}#id">Payment</a> </td>
+    <td><a href="/myapp/trainer_manage_workoutplan/{{ i.id }}#id">Add Workoutplan</a> <br><br>
+    <a href="/myapp/trainer_view_workoutplan/{{ i.id }}#id">View Workoutplan</a>
+
+  <td><a href="/myapp/trainer_manage_tips/{{ i.id }}#id">Add Tips</a> <br><br>
+    <a href="/myapp/trainer_viewtips/{{ i.id }}#id">View Tips</a>
+
+    </td>
+
+
+     <td><a href="/myapp/trainer_manage_classplan/{{ i.id }}#id">Add Class</a> <br><br>
+    <a href="/myapp/trainer_viewclassplan/{{ i.id }}#id">View Class</a>
+
+    </td>
+
+    </tr>
+          {% endfor %}
+
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+{% endblock %}
+{#</html>#}

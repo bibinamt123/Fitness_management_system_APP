@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body>
+<h2 class="text-center">View Workout Plan</h2>
+
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+    <tr>
+      <td>Sl no</td>
+      <td>Workoutname</td>
+      <td>Description</td>
+      <td>&nbsp;Level</td>
+      <td>Video</td>
+      <td></td>
+{#      <td></td>#}
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>&nbsp;{{ i.workoutname }}</td>
+      <td>{{ i.description }}</td>
+      <td>{{ i.level }}</td>
+
+
+    <td><a href="/myapp/trainer_viewprogresst/{{ i.id }}">Delete</a> </td>
+{#    <td><a href="/myapp/trainer_viewprogresst/{{ i.REQUEST.USER.id }}">Progress</a> </td>#}
+
+    </tr>
+  </table>
+    {% endfor %}
+</form>
+</body>
+{% endblock %}
+</html>

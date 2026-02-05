@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body>
+<h2 class="text-center">Workout Plan</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/trainer_manage_workoutplan_post/" enctype="multipart/form-data">
+{% csrf_token %}
+    <input type="hidden" name="reqid" value="{{ id }}"/>
+  <table class="table table-bordered">
+
+    <tr>
+      <th>WorkName</th>
+      <td>
+      <input type="text" name="select" id="textfield"  class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th>Level</th>
+      <td>
+      <input type="text" name="textfield" id="textfield"  class="form-control" required /></td>
+    </tr>
+   <tr>
+      <th>Video</th>
+      <td>
+      <input type="file" name="filefield" id="textfield"  class="form-control" required/></td>
+    </tr>
+   <tr>
+      <th>Description</th>
+      <td>
+      <textarea name="textarea" rows="" cols=""  class="form-control" required></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center"> <input type="submit" name="button" id="button" class="btn btn-info" value="Submit" /></div></td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}
+</html>

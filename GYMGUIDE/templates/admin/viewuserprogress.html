@@ -1,0 +1,190 @@
+{##}
+{#{% extends "admin/homeindex.html" %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <title>Bar Chart with Table Data</title>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
+{#</head>#}
+{#<body>#}
+{#    <h3>Workout Progress</h3>#}
+{##}
+{#    <!-- The Table with Data -->#}
+{#    <table id="dataTable" class="table table-bordered">#}
+{#        <tr>#}
+{#            <th>Sl no</th>#}
+{#            <th>Date</th>#}
+{#            <th>Workoutplan</th>#}
+{#            <th>Progress Notes</th>#}
+{#            <th>Calories Burned</th>#}
+{#            <th>Weight</th>#}
+{#        </tr>#}
+{#       {% for i in data %}#}
+{#           <td>{{ forloop.counter }}</td>#}
+{#           <td>{{ i.date }}</td>#}
+{#           <td>{{ i.WORKOUTPLAN.workoutname }}</td>#}
+{#           <td>{{ i.progressnotes }}</td>#}
+{#           <td>{{ i.caloriesburned }}</td>#}
+{#           <td>{{ i.weight }}</td>#}
+{#        {% endfor %}#}
+{#    </table>#}
+{##}
+{#    <!-- Canvas for Bar Chart -->#}
+{#    <canvas id="myChart" width="400" height="200"></canvas>#}
+{##}
+{#    <script>#}
+{#        // Extract Data from HTML Table#}
+{#        const table = document.getElementById('dataTable');#}
+{#        const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip header row#}
+{##}
+{#        const dates = [];#}
+{#        const weights = [];#}
+{#        const calories = [];#}
+{##}
+{#        rows.forEach(row => {#}
+{#            const cells = row.querySelectorAll('td');#}
+{#            dates.push(cells[1].textContent);        // Date column#}
+{#            weights.push(parseFloat(cells[5].textContent)); // Weight column#}
+{#            calories.push(parseInt(cells[4].textContent));  // Calories Burned column#}
+{#        });#}
+{##}
+{#        // Render Bar Chart Using Chart.js#}
+{#        const ctx = document.getElementById('myChart').getContext('2d');#}
+{#        const myChart = new Chart(ctx, {#}
+{#            type: 'bar',#}
+{#            data: {#}
+{#                labels: dates,#}
+{#                datasets: [#}
+{#                    {#}
+{#                        label: 'Weight (kg)',#}
+{#                        data: weights,#}
+{#                        backgroundColor: 'rgba(54, 162, 235, 0.5)',#}
+{#                        borderColor: 'rgba(54, 162, 235, 1)',#}
+{#                        borderWidth: 1#}
+{#                    },#}
+{#                    {#}
+{#                        label: 'Calories Burned',#}
+{#                        data: calories,#}
+{#                        backgroundColor: 'rgba(255, 99, 132, 0.5)',#}
+{#                        borderColor: 'rgba(255, 99, 132, 1)',#}
+{#                        borderWidth: 1#}
+{#                    }#}
+{#                ]#}
+{#            },#}
+{#            options: {#}
+{#                responsive: true,#}
+{#                scales: {#}
+{#                    y: {#}
+{#                        beginAtZero: true#}
+{#                    }#}
+{#                }#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+{#</body>#}
+{#</html>#}
+{#{% endblock %}#}
+
+
+{% extends "admin/homeindex.html" %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Chart with Table Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h3>View Workout Progress Report</h3>
+
+<form action="{% url 'download_user_progress_report' %}" method="get">
+    <button type="submit" class="btn btn-primary">Download User Progress Report</button>
+</form>
+    <!-- The Table with Data -->
+    <table id="dataTable" class="table table-bordered">
+        <tr>
+            <th>Sl no</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Workout Plan</th>
+            <th>Progress Notes</th>
+            <th>Calories Burned</th>
+            <th>Weight</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.USER.name }}<br>{{ i.USER.email }}</td>
+            <td>{{ i.WORKOUTPLAN.workoutname }}</td>
+            <td>{{ i.progressnotes }}</td>
+            <td>{{ i.caloriesburned }}</td>
+            <td>{{ i.weight }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Canvas for Bar Chart -->
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        // Extract Data from HTML Table
+        const table = document.getElementById('dataTable');
+        const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip header row
+
+        const dates = [];
+        const weights = [];
+        const calories = [];
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const date = cells[1]?.textContent || '';
+            const weight = parseFloat(cells[5]?.textContent) || 0;
+            const calorie = parseInt(cells[4]?.textContent) || 0;
+
+            if (date) dates.push(date);
+            weights.push(weight);
+            calories.push(calorie);
+        });
+
+        // Render Bar Chart Using Chart.js
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dates,
+                datasets: [
+                    {
+                        label: 'Weight (kg)',
+                        data: weights,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Calories Burned',
+                        data: calories,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
+

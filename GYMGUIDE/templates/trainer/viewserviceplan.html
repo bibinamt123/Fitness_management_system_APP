@@ -1,0 +1,44 @@
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+
+<h2 class="text-center">View Service Plan</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/trainer_view_serviceplan_post/#id">
+    {% csrf_token %}
+    <table class="pull-left">
+        <tr>
+            <td><input type="text" name="search" class="form-control" placeholder="Search Service Plan"></td>
+            <td><input type="submit" value="Search" class="btn btn-success"></td>
+        </tr>
+    </table>
+</form>
+
+<br>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Sl No</th>
+        <th>Service Plan</th>
+        <th>Duration (Months)</th>
+        <th>Amount ($)</th>
+        <th>Features</th>
+    </tr>
+
+    {% for i in data %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.Splan }}</td>
+        <td>{{ i.duration }}</td>
+        <td>{{ i.amount }}</td>
+        <td>
+            {% if i.unlimited_equipment %}️ Unlimited Equipment <br>{% endif %}
+            {% if i.personal_trainer %}️ Personal Trainer <br>{% endif %}
+            {% if i.weight_loss_classes %}️ Weight Loss Classes <br>{% endif %}
+            {% if i.group_classes %}️ Group Classes <br>{% endif %}
+            {% if i.nutrition_plan %}️ Nutrition Plan <br>{% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

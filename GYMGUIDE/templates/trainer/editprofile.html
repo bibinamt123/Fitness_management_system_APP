@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Untitled Document</title>
+</head>
+{% extends "trainer/homeindex.html" %}
+
+{% block body %}
+<body>
+<h2 class="text-center">Profile</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/edit_trainer_profile_post/" enctype="multipart/form-data">
+  {% csrf_token %}
+{#  <input type="hidden" name="tid" id="tid" value="{{ data.id }}" />#}
+  <table class="table table-bordered">
+
+    <tr>
+      <th>Name</th>
+      <th>
+        <input type="text" name="textfield" class="form-control" required id="textfield2" value="{{ data.name }}" pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed for name" />
+      </th>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <th>
+        <input type="text" name="textfield2" class="form-control" required id="textfield3" value="{{ data.phone }}" pattern="^\d{10}$" title="Please enter a valid 10-digit phone number" />
+      </th>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <th>
+        <input type="email" name="textfield3" class="form-control" required id="textfield4" value="{{ data.email }}" />
+      </th>
+    </tr>
+    <tr>
+      <th>Qualification</th>
+      <th>
+        <input type="text" name="qualification" id="textfield5" class="form-control" value="{{ data.qualification }}" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for qualification" />
+      </th>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <th>
+        <p>
+          <label>
+            <input type="radio" name="RadioGroup1" value="male" id="RadioGroup1_0" {% if data.gender == "male" %} checked {% endif %} />
+            Male
+          </label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="female" id="RadioGroup1_1" {% if data.gender == "female" %} checked {% endif %} />
+            Female
+          </label>
+          <br />
+          <label>
+            <input type="radio" name="RadioGroup1" value="others" id="RadioGroup1_2" {% if data.gender == "others" %} checked {% endif %} />
+            Others
+          </label>
+          <br />
+        </p>
+      </th>
+    </tr>
+    <tr>
+      <th>DOB</th>
+      <th>
+        <input type="date" name="textfield5" class="form-control" required id="textfield6" value="{{ data.dob|date:"Y-m-d" }}" />
+      </th>
+    </tr>
+    <tr>
+      <th>Photo</th>
+      <th>
+          <img src="{{ data.photo }}" height="100" width="100">
+        <input type="file" name="fileField" class="form-control"  id="fileField" />
+      </th>
+    </tr>
+    <tr>
+      <th>Experience</th>
+      <th>
+        <input type="text" name="textfield6" class="form-control" required id="textfield6" value="{{ data.experience }}" pattern="[0-9]*"  />
+      </th>
+    </tr>
+
+
+  <tr>
+      <th>Specialization</th>
+      <th>
+        <input type="text" name="spec" class="form-control" required id="textfield6" value="{{ data.specialization }}" pattern="[A-Z a-z]*" />
+      </th>
+    </tr>
+
+{#  <tr>#}
+{#      <th>Qualification</th>#}
+{#      <th>#}
+{#        <input type="text" name="qua" class="form-control" required id="textfield6" value="{{ data.experience }}" pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for experience" />#}
+{#      </th>#}
+{#    </tr>#}
+{#    <tr>#}
+  <tr>
+
+      <th colspan="2"><div align="center">
+        <input type="submit" name="button" id="button" value="Submit" class="btn btn-info" />
+      </div>
+      </th>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}
+</html>

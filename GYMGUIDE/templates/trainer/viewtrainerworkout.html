@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body><h2 class="text-center">View Workout Plan</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/trainer_view_workoutplan_POST/">
+{% csrf_token %}
+
+{#<table class="table table-bordered">#}
+{#  <tr>#}
+{#    <td><label for="textfield"></label>#}
+{#      <input type="text" name="textfield" id="textfield" />#}
+{#   </td>#}
+{#    <td>#}
+{#      <input type="submit" name="button" id="button" value="SEARCH" />#}
+{#</td>#}
+{#  </tr>#}
+{#</table>#}
+<p></p>
+<table class="table table-bordered">
+  <tr>
+    <th>Sl no</th>
+          <th>workoutname</th>
+
+    <th>level</th>
+    <th>video</th>
+    <th>Description</th>
+    <th>Actions</th>
+{#      <th></th>#}
+    <th>Diet Add</th>
+      <td>Diet View</td>
+
+    <th>Progress</th>
+
+  </tr>
+    {% for i in data %}
+  <tr>
+    <td>&nbsp;{{ forloop.counter }}</td>
+    <td>&nbsp;{{ i.workoutname }}</td>
+    <td>{{ i.level }}</td>
+
+      <td><video width="320" height="240" controls>
+<source src="{{ i.video }}" type="video/mp4">
+
+</video>
+    </td>
+    <td>&nbsp;{{ i.description }}</td>
+    <td><a href="/myapp/trainer_editworkoutplan/{{ i.id }}#id" class="btn btn-success">Edit</a> </td>
+{#      <td></td>#}
+{#    <td><a href="/myapp/delete_workoutplan/{{ i.id }}#id" class="btn btn-danger" onclick="return confirm('Are You Sure?')">Delete</a> </td>#}
+    <td><a href="/myapp/trainer_manage_dietplan/{{ i.id }}#id" class="btn btn-info">Diet Add</a> </td>
+    <td><a href="/myapp/trainer_viewdietplan/{{ i.id }}#id" class="btn btn-warning">Diet view </a> </td>
+    <td><a href="/myapp/trainer_view_progress/{{ i.id }}#id" class="btn btn-success">Progress </a> </td>
+  </tr>
+    {% endfor %}
+</table>
+    </form>
+<p>&nbsp;</p>
+</body>
+{% endblock %}
+</html>

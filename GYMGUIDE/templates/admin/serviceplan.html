@@ -1,0 +1,103 @@
+{#<form action="" method="get"></form><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "admin/homeindex.html" %}#}
+{##}
+{#{% block body %}#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/myapp/admin_serviceplanpost/">#}
+{#    {% csrf_token %}#}
+{##}
+{#<table class="table table-bordered">#}
+{#  <tr>#}
+{#    <th>Plan</th>#}
+{#    <td>#}
+{#      <select name="select" id="select" class="form-control" required>#}
+{#          <option>cardio</option>#}
+{#          <option>weightloss</option>#}
+{#          <option>weightgain</option>#}
+{#          <option>muscle building</option>#}
+{#          <option>strength training</option>#}
+{#      #}
+{#      </select>#}
+{#   </td>#}
+{#  </tr>#}
+{##}
+{##}
+{#    <tr>#}
+{#        <th>Amount</th>#}
+{#        <td><input type="number" name="nbr" class="form-control" required pattern="[0-9]"></td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#        <th>Duration (M)</th>#}
+{#        <td><input type="number" name="dur" class="form-control" required pattern="[0-9]{2}"></td>#}
+{#    </tr>#}
+{##}
+{#  <tr>#}
+{##}
+{#    <td colspan="2"><div align="center"><input type="submit" name="button" id="button" value="Submit"class="btn btn-info" />#}
+{#   </div></td>#}
+{#  </tr>#}
+{#</table>#}
+{#</form>#}
+{##}
+{#</body>#}
+{##}
+{#{% endblock %}#}
+{#</html>#}
+{% extends "admin/homeindex.html" %}
+{% block body %}
+<body>
+    <h3>Add Service Plan</h3>
+
+    <form id="form1" name="form1" method="post" action="/myapp/admin_serviceplanpost/">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Plan</th>
+                <td>
+                    <select name="plan" class="form-control" required>
+                        <option value="cardio">Cardio</option>
+                        <option value="weightloss">Weight Loss</option>
+                        <option value="weightgain">Weight Gain</option>
+                        <option value="muscle_building">Muscle Building</option>
+                        <option value="strength_training">Strength Training</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Amount ($)</th>
+                <td><input type="number" name="amount" class="form-control" required></td>
+            </tr>
+            <tr>
+                <th>Duration (Months)</th>
+                <td><input type="number" name="duration" class="form-control" required></td>
+            </tr>
+            <tr>
+                <th>Additional Services</th>
+                <td>
+{#                    <input type="checkbox" name="free_riding"> Free Riding <br>#}
+                    <input type="checkbox" name="unlimited_equipment"> Unlimited Equipment <br>
+                    <input type="checkbox" name="personal_trainer"> Personal Trainer <br>
+                    <input type="checkbox" name="weight_loss_classes"> Weight Loss Classes <br>
+                    <input type="checkbox" name="group_classes"> Group Fitness Classes <br>
+{#                    <input type="checkbox" name="swimming_pool_access"> Swimming Pool Access <br>#}
+{#                    <input type="checkbox" name="sauna_access"> Sauna Access <br>#}
+                    <input type="checkbox" name="nutrition_plan"> Nutrition Plan <br>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div align="center">
+                        <input type="submit" name="button" id="button" value="Submit" class="btn btn-info">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+{% endblock %}

@@ -1,0 +1,135 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{#{% extends "admin/homeindex.html" %}#}
+{##}
+{#{% block body %}#}
+{#<body>#}
+{#<h2 class="text-center">View Users</h2>#}
+{##}
+{#<form id="form1" name="form1" method="post" action="/myapp/admin_viewuserpost/#id">#}
+{#{% csrf_token %}#}
+{#  <table class="pull-left">#}
+{#    <tr>#}
+{#      <td>#}
+{#      <input type="text" name="textfield" id="textfield" class="form-control" placeholder="Name..."/></td>#}
+{#      <td><input type="submit" name="button" id="button" value="SEARCH"  class="btn btn-success"/></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#<br>#}
+{#<form action="{% url 'download_user_report' %}" method="get" target="_blank">#}
+{#    <button type="submit" class="btn btn-primary">Download User Report</button>#}
+{#</form>#}
+{##}
+{##}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Sl no</th>#}
+{#      <th>Name</th>#}
+{#      <th>Email</th>#}
+{#      <th>Phone no</th>#}
+{#      <th>Address</th>#}
+{#      <th>Post</th>#}
+{#      <th>Pin</th>#}
+{#      <th>District</th>#}
+{#      <th>Photo</th>#}
+{#      <th>Gender</th>#}
+{#      <th>Health Condition</th>#}
+{#        <td>Progress</td>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ forloop.counter }}</td>#}
+{#      <td>&nbsp;{{ i.name }}</td>#}
+{#      <td>&nbsp;{{ i.email }}</td>#}
+{#      <td>&nbsp;{{ i.phoneno }}</td>#}
+{#      <td>&nbsp;{{ i.place }}</td>#}
+{#      <td>{{ i.post }}&nbsp;</td>#}
+{#      <td>{{ i.pin }}&nbsp;</td>#}
+{#      <td>&nbsp;{{i.district  }}</td>#}
+{#      <td>&nbsp;<img src="{{ i.photo }}" width="100" height="100"></td>#}
+{#      <td>&nbsp;{{ i.gender }}</td>#}
+{#    <td>Height:{{ i.height }}<br>Weight:{{ i.weight }}<br><a href="{{ i.weightmedicaldetails }}">certificate</a> </td>#}
+{#    <td><a href="/myapp/admin_view_progress/{{ i.id }}">Progress</a> </td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#    </table>#}
+{##}
+{#  <p>&nbsp;</p>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+<!-- templates/admin/view_users.html -->
+
+{% extends "admin/homeindex.html" %}
+
+{% block body %}
+<body>
+<h2 class="text-center">View Users</h2>
+
+<!-- Form for Searching Users -->
+<form id="form1" name="form1" method="post" action="/myapp/admin_viewuserpost/#id">
+    {% csrf_token %}
+    <table class="pull-left">
+        <tr>
+            <td>
+                <input type="text" name="textfield" id="textfield" class="form-control" placeholder="Name..."/>
+            </td>
+            <td>
+                <input type="submit" name="button" id="button" value="SEARCH" class="btn btn-success"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<br>
+
+<!-- Form to download the user report -->
+<form action="{% url 'download_user_report' %}" method="get" target="_blank">
+    <button type="submit" class="btn btn-primary">Download User Report</button>
+</form>
+
+<!-- Table to display user data -->
+<table class="table table-bordered">
+    <tr>
+        <th>Sl no</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone no</th>
+        <th>Address</th>
+        <th>Post</th>
+        <th>Pin</th>
+        <th>District</th>
+        <th>Photo</th>
+        <th>Gender</th>
+        <th>Health Condition</th>
+        <th>Progress</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.phoneno }}</td>
+        <td>{{ i.place }}</td>
+        <td>{{ i.post }}</td>
+        <td>{{ i.pin }}</td>
+        <td>{{ i.district }}</td>
+        <td><img src="{{ i.photo }}" width="100" height="100"></td>
+        <td>{{ i.gender }}</td>
+        <td>
+            Height: {{ i.height }}<br>
+            Weight: {{ i.weight }}<br>
+            <a href="{{ i.weightmedicaldetails }}">certificate</a>
+        </td>
+        <td><a href="/myapp/admin_view_progress/{{ i.id }}">Progress</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p>&nbsp;</p>
+</body>
+{% endblock %}

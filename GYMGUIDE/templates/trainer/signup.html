@@ -1,0 +1,155 @@
+{##}
+{#<body>#}
+{#<form action="/myapp/triner_signuppost/" method="post" enctype="multipart/form-data" name="form1" id="form1">#}
+{#    {% csrf_token %}#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th width="133">Name</th>#}
+{#      <td width="142">#}
+{#        <input type="text" name="textfield" id="textfield" class="form-control" required pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed for name" />#}
+{#      </td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <th>Phone</th>#}
+{#      <td>#}
+{#        <input type="text" name="textfield2" id="textfield2" class="form-control" required pattern="[6789][0-9]{9}" title="Please enter a valid 10-digit phone number" />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Email</th>#}
+{#      <td>#}
+{#        <input type="email" name="textfield3" id="textfield3" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Qualification</th>#}
+{#      <td>#}
+{#        <input type="text" name="textfield4" id="textfield4" class="form-control" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for qualification" />#}
+{#      </td>#}
+{#    </tr>#}
+{#       <tr>#}
+{#      <th>Specialization</th>#}
+{#      <td>#}
+{#        <input type="text" name="specialization" id="textfield4" class="form-control" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for qualification" />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th height="94">Gender</th>#}
+{#      <td>#}
+{#        <label>#}
+{#          <input type="radio" name="RadioGroup1" value="male" id="RadioGroup1_0" />#}
+{#          Male#}
+{#        </label>#}
+{#        <br />#}
+{#        <label>#}
+{#          <input type="radio" name="RadioGroup1" value="female" id="RadioGroup1_1" />#}
+{#          Female#}
+{#        </label>#}
+{#        <br />#}
+{#        <label>#}
+{#          <input type="radio" name="RadioGroup1" value="others" id="RadioGroup1_2" />#}
+{#          Others#}
+{#        </label>#}
+{#        <br />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>DOB</th>#}
+{#      <td>#}
+{#        <input type="date" name="textfield5" id="textfield5" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Photo</th>#}
+{#      <td>#}
+{#        <input type="file" name="fileField" id="fileField" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Experience</th>#}
+{#      <td>#}
+{#        <input type="text" name="textfield6" id="textfield6" class="form-control" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for experience description" />#}
+{#      </td>#}
+{#    </tr>#}
+{#            <tr>#}
+{#      <th>Certificate</th>#}
+{#      <td>#}
+{#        <input type="file" name="fileField2" id="fileField" class="form-control" required />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td colspan="2">#}
+{#        <div align="center">#}
+{#          <input type="submit" name="button" id="button" value="Submit" class="btn btn-info" />#}
+{#        </div>#}
+{#      </td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen">
+    <form action="/myapp/triner_signuppost/" method="post" enctype="multipart/form-data" name="form1" id="form1" class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+        {% csrf_token %}
+        <h2 class="text-2xl font-bold mb-6 text-center">Trainer Signup</h2>
+
+        <label class="block mb-2 font-medium">Name</label>
+        <input type="text" name="textfield" id="textfield" class="w-full p-2 mb-4 border rounded-md" required pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed for name" placeholder="Enter your name">
+
+        <label class="block mb-2 font-medium">Phone</label>
+        <input type="text" name="textfield2" id="textfield2" class="w-full p-2 mb-4 border rounded-md" required pattern="[6789][0-9]{9}" maxlength="10" title="Please enter a valid 10-digit phone number" placeholder="Enter your phone number">
+
+        <label class="block mb-2 font-medium">Email</label>
+        <input type="email" name="textfield3" id="textfield3" class="w-full p-2 mb-4 border rounded-md" required placeholder="Enter your email">
+
+        <label class="block mb-2 font-medium">Qualification</label>
+
+        <input type="text" name="textfield4" id="textfield4" class="w-full p-2 mb-4 border rounded-md" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed for qualification" placeholder="Enter your qualification">
+
+        <label class="block mb-2 font-medium">Specialization</label>
+        <input type="text" name="specialization" id="textfield4" class="w-full p-2 mb-4 border rounded-md" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed" placeholder="Enter your specialization">
+
+        <label class="block mb-2 font-medium">Gender</label>
+        <div class="flex gap-4 mb-4">
+            <label><input type="radio" name="RadioGroup1" value="male" class="mr-1"> Male</label>
+            <label><input type="radio" name="RadioGroup1" value="female" class="mr-1"> Female</label>
+            <label><input type="radio" name="RadioGroup1" value="others" class="mr-1"> Others</label>
+        </div>
+
+        <label class="block mb-2 font-medium">Date of Birth</label>
+        <input type="date" name="textfield5" id="dob"  class="w-full p-2 mb-4 border rounded-md" required>
+
+        <label class="block mb-2 font-medium">Photo</label>
+        <input type="file" name="fileField" id="fileField" class="w-full p-2 mb-4 border rounded-md" required>
+
+        <label class="block mb-2 font-medium">Experience</label>
+        <input type="text" name="textfield6" id="textfield6" class="w-full p-2 mb-4 border rounded-md" required pattern="[0-9]+" title="Only numbers, and spaces are allowed" placeholder="Enter your experience">
+
+        <label class="block mb-2 font-medium">Certificate</label>
+        <input type="file" name="fileField2" id="fileField2" class="w-full p-2 mb-6 border rounded-md" required>
+        <label class="block mb-2 font-medium">Password</label>
+        <input type="password" name="password" id="textfield6" class="w-full p-2 mb-4 border rounded-md" required pattern="[A-Za-z0-9\s]+" title="Only letters, numbers, and spaces are allowed" placeholder="Enter your experience">
+
+
+        <button type="submit" name="button" id="button" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Submit</button>
+    </form>
+
+
+<script>
+    // Calculate the maximum allowable date (18 years ago from today)
+    const today = new Date();
+    const minAgeDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
+    // Set the max attribute to restrict selection
+    document.getElementById("dob").setAttribute("max", minAgeDate.toISOString().split("T")[0]);
+</script>
+</body>
+</html>

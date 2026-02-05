@@ -1,0 +1,81 @@
+<form action="" method="get"></form><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+{% extends "admin/homeindex.html" %}
+
+{% block body %}
+<body>
+<h2 class="text-center">Add Facility</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/admin_facilitypost/" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<table class="table table-bordered">
+  <tr>
+    <th>Equipment</th>
+    <td>
+      <select name="Equipment" id="select" class="form-control" required>
+          <option hidden>---Select---</option>
+          <option>Dumbell</option>
+          <option>Pull up Bar</option>
+          <option>Sleds</option>
+          <option>Weighted Vest</option>
+          <option>Push Up Bars</option>
+          <option>Bench</option>
+          <option>Barbell</option>
+          <option>Kettlebell</option>
+          <option>Cable Machine</option>
+          <option>Smith Machine</option>
+          <option>Kettlebell</option>
+          <option>Kettlebell</option>
+          <option>Trap Bar</option>
+          <option>Bench Press</option>
+          <option>Tire</option>
+          <option>Resistance Band</option>
+          <option>Punching bag</option>
+          <option>Climbing rope</option>
+          <option>Sandbag</option>
+          <option>Plyo Box</option>
+          <option>Skipping Rope</option>
+          <option>Foam Roller</option>
+          <option>Yoga Mat</option>
+          <option>Squat Rack</option>
+          <option>Safety Squat Bar</option>
+          <option>Dip Station</option>
+
+      </select>
+   </td>
+  </tr>
+
+
+    <tr>
+        <th>Quantity</th>
+        <td><input type="number" name="Quantity" class="form-control" required pattern="[0-9]"></td>
+    </tr>
+
+    <tr>
+        <th>Condition</th>
+        <td><input type="text" name="Condition" class="form-control" required ></td>
+    </tr>
+
+
+
+     <tr>
+        <th>Photo</th>
+        <td><input type="file" name="photo" class="form-control" required ></td>
+    </tr>
+  <tr>
+
+    <td colspan="2"><div align="center"><input type="submit" name="button" id="button" value="Submit"class="btn btn-info" />
+   </div></td>
+  </tr>
+</table>
+</form>
+
+</body>
+
+{% endblock %}
+</html>

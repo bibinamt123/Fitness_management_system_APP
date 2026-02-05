@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+{% extends "trainer/homeindex.html" %}
+{% block body %}
+<body>
+<h2 class="text-center">Diet Plan</h2>
+
+<form id="form1" name="form1" method="post" action="/myapp/trainer_manage_dietplan_post/">
+    {% csrf_token %}
+          <input type="hidden" name="pid" id="textfield"  class="form-control" required value="{{ id }}" /></td>
+
+  <table class="table table-bordered">
+
+    <tr>
+      <th width="210">Days</th>
+      <td width="242">
+        <select name="select" id="select" class="form-control">
+            <option value="Monday">Monday</option>
+          <option value="tuesday">tuesday</option>
+          <option value="wednesday">wednesday</option>
+          <option value="thursday">thursday </option>
+          <option value="friday">friday</option>
+          <option value="saturday">saturday</option>
+          <option value="sunday">sunday</option>
+
+      </select></td>
+    </tr>
+    <tr>
+      <th>Session</th>
+      <td>
+      <input type="text" name="textfield" id="textfield"  class="form-control" required /></td>
+    </tr>
+    <tr>
+      <th>Diets</th>
+      <td>
+      <input type="text" name="textfield2" id="textfield2"  class="form-control" required /></th>
+    </tr>
+    <tr>
+      <th height="26">&nbsp;</th>
+      <td><input type="submit" name="button" id="button" class="btn btn-info" value="Submit" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}
+</html>
